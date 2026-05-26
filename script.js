@@ -32,17 +32,6 @@ const translations = {
     }
 };
 
-// Add hints translations
-translations.en['hints.title'] = 'Formulas / Hints';
-translations.en['hints.formula1'] = 'Formula 01: Required number of customers = Total Revenue / Avg. Order Value.';
-translations.en['hints.formula2'] = 'Formula 02: Required leads = Customers * 100 / Lead Response Rate.';
-translations.en['hints.formula3'] = 'Formula 03: Required prospects = Leads * 100 / Prospect Response Rate.';
-
-translations.bg['hints.title'] = 'Подсказки / Формули';
-translations.bg['hints.formula1'] = 'Формула 01: Необходимия брой клиенти = Оборот / Средна стойност на поръчката.';
-translations.bg['hints.formula2'] = 'Формула 02: Необходимия брой потенциални клиенти (leads) = Клиенти * 100 / Процент на отговорите от потенциални клиенти.';
-translations.bg['hints.formula3'] = 'Формула 03: Необходимия брой контакти (prospects) = Потенциални клиенти * 100 / Процент на отговорите от контакти.';
-
 // Apply translations to elements matching [data-i18n]
 function applyTranslations(lang) {
     if (!translations[lang]) return;
@@ -87,7 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
         leadRate.addEventListener("input", function() {
             valLeadRate.textContent = parseFloat(this.value).toFixed(2) + "%";
             updateSliderBackground(this);
-            refreshChartFromValues();
         });
         updateSliderBackground(leadRate);
     }
@@ -96,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
         prospectRate.addEventListener("input", function() {
             valProspectRate.textContent = parseFloat(this.value).toFixed(2) + "%";
             updateSliderBackground(this);
-            refreshChartFromValues();
         });
         updateSliderBackground(prospectRate);
     }
@@ -174,25 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const totalRev = totalRevenue ? Number(totalRevenue.value) : 0;
         const avgOrder = avgOrderValue ? Number(avgOrderValue.value) : 1;
         const desiredCustomers = Math.max(0, Math.floor(totalRev / (avgOrder || 1)));
-
-        // Read response rates from sliders
-        const leadRatePct = (leadRate ? Number(leadRate.value) / 100 : 0.4);
-        const prospectRatePct = (prospectRate ? Number(prospectRate.value) / 100 : 0.2);
-
-        // Compute needed leads and prospects based on response rates (avoid division by zero)
-        let desiredLeads;
-        if (leadRatePct > 0) {
-            desiredLeads = Math.max(0, Math.ceil(desiredCustomers / leadRatePct));
-        } else {
-            desiredLeads = Math.max(0, Math.round(desiredCustomers * 2.5));
-        }
-
-        let desiredProspects;
-        if (prospectRatePct > 0) {
-            desiredProspects = Math.max(0, Math.ceil(desiredLeads / prospectRatePct));
-        } else {
-            desiredProspects = Math.max(0, Math.round(desiredLeads * 5));
-        }
+        const desiredLeads = Math.max(0, Math.round(desiredCustomers * 2.5));
+        const desiredProspects = Math.max(0, Math.round(desiredLeads * 5));
 
         // Collect base prospects from bar rows (store base if not present)
         const rows = Array.from(document.querySelectorAll('.bar-row'));
