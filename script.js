@@ -144,14 +144,94 @@ document.addEventListener('DOMContentLoaded', () => {
     if (totalRevenue) {
         totalRevenue.addEventListener('input', (e) => {
             try { localStorage.setItem('lp_totalRevenue', e.target.value); } catch (err) {}
+            refreshChartFromValues();
         });
     }
 
     if (avgOrderValue) {
         avgOrderValue.addEventListener('input', (e) => {
             try { localStorage.setItem('lp_avgOrderValue', e.target.value); } catch (err) {}
+            refreshChartFromValues();
         });
     }
+
+    // Refresh chart when values change
+    function refreshChartFromValues() {
+        // Read values
+        const totalRev = totalRevenue ? Number(totalRevenue.value) : 0;
+        const avgOrder = avgOrderValue ? Number(avgOrderValue.value) : 1;
+        const desiredCustomers = Math.max(0, Math.floor(totalRev / (avgOrder || 1)));
+        const desiredLeads = Math.max(0, Math.round(desiredCustomers * 2.5));
+        const desiredProspects = Math.max(0, Math.round(desiredLeads * 5));
+
+        // Collect base prospects from bar rows (store base if not present)
+        const rows = Array.from(document.querySelectorAll('.bar-row'));
+        let baseTotal = 0;
+        rows.forEach(r => {
+            if (!r.dataset.baseProspects) {
+                r.dataset.baseProspects = r.getAttribute('data-prospects') || '0';
+            }
+            baseTotal += Number(r.dataset.baseProspects || 0);
+        });
+        if (baseTotal === 0) baseTotal = 1;
+
+        const scale = desiredProspects / baseTotal || 1;
+
+        // compute new per-row values
+        const newProspectsPerRow = rows.map(r => Math.max(0, Math.round(Number(r.dataset.baseProspects) * scale)));
+        const newProspectsTotal = newProspectsPerRow.reduce((a,b)=>a+b,0) || 1;
+
+        // ratios
+        const leadsRatio = desiredLeads / (desiredProspects || 1);
+        const customersRatio = desiredCustomers / (desiredLeads || 1);
+
+        let maxProspect = Math.max(...newProspectsPerRow, 1);
+
+        // Update rows and bars
+        rows.forEach((r, idx) => {
+            const p = newProspectsPerRow[idx];
+            const l = Math.round(p * leadsRatio);
+            const c = Math.round(l * customersRatio);
+            r.setAttribute('data-prospects', p);
+            r.setAttribute('data-leads', l);
+            r.setAttribute('data-customers', c);
+
+            const barPros = r.querySelector('.bar-prospects');
+            const barLea = r.querySelector('.bar-leads');
+            const barCus = r.querySelector('.bar-customers');
+            if (barPros) barPros.style.width = ((p / maxProspect) * 100) + '%';
+            if (barLea) barLea.style.width = (p>0 ? (l / p) * 100 : 0) + '%';
+            if (barCus) barCus.style.width = (l>0 ? (c / l) * 100 : 0) + '%';
+        });
+
+        // Update stat cards
+        const prospectsValueEl = document.getElementById('prospectsValue');
+        const leadsValueEl = document.getElementById('leadsValue');
+        const customersValueEl = document.getElementById('customersValue');
+        const prospectsFill = document.getElementById('prospectsFill');
+        const leadsFill = document.getElementById('leadsFill');
+        const customersFill = document.getElementById('customersFill');
+        const prospectsPercent = document.getElementById('prospectsPercent');
+        const leadsPercent = document.getElementById('leadsPercent');
+        const customersPercent = document.getElementById('customersPercent');
+
+        if (prospectsValueEl) prospectsValueEl.textContent = newProspectsTotal;
+        if (leadsValueEl) leadsValueEl.textContent = desiredLeads;
+        if (customersValueEl) customersValueEl.textContent = desiredCustomers;
+
+        // Percent fills relative to prospects
+        const leadsPct = Math.round((desiredLeads / (desiredProspects || 1)) * 100);
+        const customersPct = Math.round((desiredCustomers / (desiredProspects || 1)) * 100);
+        if (prospectsFill) prospectsFill.style.width = '100%';
+        if (leadsFill) { leadsFill.style.width = Math.min(100, leadsPct) + '%'; }
+        if (customersFill) { customersFill.style.width = Math.min(100, customersPct) + '%'; }
+        if (prospectsPercent) prospectsPercent.textContent = '100%';
+        if (leadsPercent) leadsPercent.textContent = leadsPct + '%';
+        if (customersPercent) customersPercent.textContent = customersPct + '%';
+    }
+
+    // initial refresh
+    refreshChartFromValues();
 
     // Chart hover effects
     document.querySelectorAll('.bar-row').forEach(row => {
