@@ -300,6 +300,50 @@ body {
 .input-wrapper.select-wrapper i.fa-chevron-up { top: 8px; }
 .input-wrapper.select-wrapper i.fa-chevron-down { bottom: 8px; top: auto; }
 
+/* Styled native select to match input appearance */
+.input-wrapper.select-wrapper select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+    outline: none;
+}
+
+.input-wrapper.select-wrapper::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid var(--text-secondary);
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* Make the select align vertically inside the input wrapper */
+.input-wrapper.select-wrapper {
+    display: flex;
+    align-items: center;
+    padding-right: 36px; /* space for custom arrow */
+}
+
+/* Improve selected option visibility */
+.input-wrapper.select-wrapper option {
+    background-color: var(--bg-panel);
+    color: var(--text-primary);
+}
+
 .input-wrapper.prefix input {
     padding-left: 5px;
 }

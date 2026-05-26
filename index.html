@@ -19,25 +19,26 @@
 
             <div class="sidebar-content">
                 <div class="form-group">
-                    <label>Language</label>
+                    <label data-i18n="label.language">Language</label>
                     <div class="input-wrapper select-wrapper">
-                        <span>🇺🇸 English</span>
+                        <select id="langSelect" aria-label="Language selector">
+                            <option value="en">🇺🇸 English</option>
+                            <option value="bg">🇧🇬 Български</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label data-i18n="label.currency">Currency</label>
+                    <div class="input-wrapper select-wrapper">
+                        <span data-i18n="value.currency">$ US Dollar</span>
                         <i class="fa-solid fa-chevron-up"></i>
                         <i class="fa-solid fa-chevron-down" style="margin-top: -8px;"></i>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label>Currency</label>
-                    <div class="input-wrapper select-wrapper">
-                        <span>$ US Dollar</span>
-                        <i class="fa-solid fa-chevron-up"></i>
-                        <i class="fa-solid fa-chevron-down" style="margin-top: -8px;"></i>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Campaign Start</label>
+                    <label data-i18n="label.campaignStart">Campaign Start</label>
                     <div class="input-wrapper">
                         <input type="text" value="08-May-2026" readonly>
                         <i class="fa-regular fa-calendar"></i>
@@ -45,7 +46,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Campaign End</label>
+                    <label data-i18n="label.campaignEnd">Campaign End</label>
                     <div class="input-wrapper">
                         <input type="text" value="04-Nov-2026" readonly>
                         <i class="fa-regular fa-calendar"></i>
@@ -53,7 +54,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Total Revenue</label>
+                    <label data-i18n="label.totalRevenue">Total Revenue</label>
                     <div class="input-wrapper prefix">
                         <span class="prefix-icon">$</span>
                         <input type="text" value="10000">
@@ -61,7 +62,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Avg. Order Value</label>
+                    <label data-i18n="label.avgOrder">Avg. Order Value</label>
                     <div class="input-wrapper prefix">
                         <span class="prefix-icon">$</span>
                         <input type="text" value="1000">
@@ -132,7 +133,7 @@
                             <span>100 people</span>
                             <span>120 people</span>
                         </div>
-                        <div class="y-axis-title">Months</div>
+                        <div class="y-axis-title" data-i18n="yaxis.title">Months</div>
                     </div>
                 </div>
 
@@ -140,7 +141,7 @@
                 <div class="stats-panel">
                     <div class="stat-card" style="background-color: #646c7a; color: #fff;">
                         <div class="stat-header">
-                            <div class="stat-title"><i class="fa-solid fa-folder"></i> Prospects</div>
+                            <div class="stat-title"><i class="fa-solid fa-folder"></i> <span data-i18n="stat.prospects">Prospects</span></div>
                             <div class="stat-percent">100%</div>
                         </div>
                         <div class="stat-value">125</div>
@@ -149,7 +150,7 @@
 
                     <div class="stat-card" style="background-color: #8993a4; color: #1e2433;">
                         <div class="stat-header">
-                            <div class="stat-title"><i class="fa-solid fa-user"></i> Leads</div>
+                            <div class="stat-title"><i class="fa-solid fa-user"></i> <span data-i18n="stat.leads">Leads</span></div>
                             <div class="stat-percent">20%</div>
                         </div>
                         <div class="stat-value" style="color: #fff;">25</div>
@@ -158,7 +159,7 @@
 
                     <div class="stat-card" style="background-color: #c7cedd; color: #1e2433;">
                         <div class="stat-header">
-                            <div class="stat-title"><i class="fa-solid fa-trophy"></i> Customers</div>
+                            <div class="stat-title"><i class="fa-solid fa-trophy"></i> <span data-i18n="stat.customers">Customers</span></div>
                             <div class="stat-percent">8%</div>
                         </div>
                         <div class="stat-value" style="color: #fff;">10</div>
@@ -171,7 +172,7 @@
             <div class="panel sliders-panel">
                 <div class="slider-group">
                     <div class="slider-header">
-                        <label>Lead Response Rate</label>
+                        <label data-i18n="label.leadRate">Lead Response Rate</label>
                     </div>
                     <div class="range-slider">
                         <input type="range" min="0" max="100" value="40" class="slider" id="leadRate">
@@ -181,7 +182,7 @@
 
                 <div class="slider-group">
                     <div class="slider-header">
-                        <label>Prospect Response Rate</label>
+                        <label data-i18n="label.prospectRate">Prospect Response Rate</label>
                     </div>
                     <div class="range-slider">
                         <input type="range" min="0" max="100" value="20" class="slider" id="prospectRate">
