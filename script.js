@@ -88,6 +88,71 @@ document.addEventListener('DOMContentLoaded', () => {
         updateSliderBackground(prospectRate);
     }
 
+    // Persistable form fields: currency, campaign dates, revenue values
+    const currencySelect = document.getElementById('currencySelect');
+    const campaignStart = document.getElementById('campaignStart');
+    const campaignEnd = document.getElementById('campaignEnd');
+    const totalRevenue = document.getElementById('totalRevenue');
+    const avgOrderValue = document.getElementById('avgOrderValue');
+    const prefixIcon = document.getElementById('prefixIcon');
+    const prefixIcon2 = document.getElementById('prefixIcon2');
+
+    const currencySymbols = { USD: '$', EUR: '€' };
+
+    // Load saved values
+    try {
+        const savedCurrency = localStorage.getItem('lp_currency');
+        if (savedCurrency && currencySelect) currencySelect.value = savedCurrency;
+        const savedStart = localStorage.getItem('lp_campaignStart');
+        if (savedStart && campaignStart) campaignStart.value = savedStart;
+        const savedEnd = localStorage.getItem('lp_campaignEnd');
+        if (savedEnd && campaignEnd) campaignEnd.value = savedEnd;
+        const savedRevenue = localStorage.getItem('lp_totalRevenue');
+        if (savedRevenue && totalRevenue) totalRevenue.value = savedRevenue;
+        const savedAvg = localStorage.getItem('lp_avgOrderValue');
+        if (savedAvg && avgOrderValue) avgOrderValue.value = savedAvg;
+    } catch (e) {}
+
+    function updatePrefix(symbol) {
+        if (prefixIcon) prefixIcon.textContent = symbol;
+        if (prefixIcon2) prefixIcon2.textContent = symbol;
+    }
+
+    // Initial prefix update
+    if (currencySelect) updatePrefix(currencySymbols[currencySelect.value] || '$');
+
+    if (currencySelect) {
+        currencySelect.addEventListener('change', (e) => {
+            const v = e.target.value;
+            updatePrefix(currencySymbols[v] || '$');
+            try { localStorage.setItem('lp_currency', v); } catch (err) {}
+        });
+    }
+
+    if (campaignStart) {
+        campaignStart.addEventListener('change', (e) => {
+            try { localStorage.setItem('lp_campaignStart', e.target.value); } catch (err) {}
+        });
+    }
+
+    if (campaignEnd) {
+        campaignEnd.addEventListener('change', (e) => {
+            try { localStorage.setItem('lp_campaignEnd', e.target.value); } catch (err) {}
+        });
+    }
+
+    if (totalRevenue) {
+        totalRevenue.addEventListener('input', (e) => {
+            try { localStorage.setItem('lp_totalRevenue', e.target.value); } catch (err) {}
+        });
+    }
+
+    if (avgOrderValue) {
+        avgOrderValue.addEventListener('input', (e) => {
+            try { localStorage.setItem('lp_avgOrderValue', e.target.value); } catch (err) {}
+        });
+    }
+
     // Chart hover effects
     document.querySelectorAll('.bar-row').forEach(row => {
         row.addEventListener('mouseenter', () => {
