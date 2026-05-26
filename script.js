@@ -51,7 +51,7 @@ function setLanguage(lang) {
 
 function updateSliderBackground(slider) {
     const value = (slider.value - slider.min) / (slider.max - slider.min) * 100;
-    slider.style.background = `linear-gradient(to right, #38bdf8 0%, #38bdf8 ${value}%, #cbd5e1 ${value}%, #cbd5e1 100%)`;
+    slider.style.background = `linear-gradient(to right, #d1d8e6 0%, #d1d8e6 ${value}%, #464f61 ${value}%, #464f61 100%)`;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
