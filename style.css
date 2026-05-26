@@ -538,6 +538,27 @@ body {
     gap: 25px;
 }
 
+.hints {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+.hints-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+.hints-list {
+    margin: 0;
+    padding-left: 18px;
+}
+.hints-list li {
+    margin-bottom: 6px;
+}
+
 .slider-group {
     display: flex;
     flex-direction: column;
