@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeadPredictor Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon"><i class="fa-solid fa-filter"></i></div>
+                <h1>LeadPredictor</h1>
+            </div>
+
+            <div class="sidebar-content">
+                <div class="form-group">
+                    <label>Language</label>
+                    <div class="input-wrapper select-wrapper">
+                        <span>🇺🇸 English</span>
+                        <i class="fa-solid fa-chevron-up"></i>
+                        <i class="fa-solid fa-chevron-down" style="margin-top: -8px;"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Currency</label>
+                    <div class="input-wrapper select-wrapper">
+                        <span>$ US Dollar</span>
+                        <i class="fa-solid fa-chevron-up"></i>
+                        <i class="fa-solid fa-chevron-down" style="margin-top: -8px;"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Campaign Start</label>
+                    <div class="input-wrapper">
+                        <input type="text" value="08-May-2026" readonly>
+                        <i class="fa-regular fa-calendar"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Campaign End</label>
+                    <div class="input-wrapper">
+                        <input type="text" value="04-Nov-2026" readonly>
+                        <i class="fa-regular fa-calendar"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Total Revenue</label>
+                    <div class="input-wrapper prefix">
+                        <span class="prefix-icon">$</span>
+                        <input type="text" value="10000">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Avg. Order Value</label>
+                    <div class="input-wrapper prefix">
+                        <span class="prefix-icon">$</span>
+                        <input type="text" value="1000">
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="top-section">
+                <!-- Chart Panel -->
+                <div class="panel chart-panel">
+                    <div class="chart-container" id="chart-container">
+                        <!-- Custom CSS Bar Chart -->
+                        <div class="y-axis-labels">
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span>4</span>
+                            <span>5</span>
+                            <span>6</span>
+                        </div>
+                        <div class="chart-grid" id="chart-grid">
+                            <!-- Background grid lines -->
+                            <div class="grid-line" style="left: 0%;"></div>
+                            <div class="grid-line" style="left: 16.66%;"></div>
+                            <div class="grid-line" style="left: 33.33%;"></div>
+                            <div class="grid-line" style="left: 50%;"></div>
+                            <div class="grid-line" style="left: 66.66%;"></div>
+                            <div class="grid-line" style="left: 83.33%;"></div>
+                            <div class="grid-line" style="left: 100%;"></div>
+
+                            <!-- Bars -->
+                            <div class="bar-row" data-month="1" data-prospects="25" data-leads="5" data-customers="2">
+                                <div class="bar-prospects" style="width: 20%;"><div class="bar-leads" style="width: 20%;"><div class="bar-customers" style="width: 40%;"></div></div></div>
+                            </div>
+                            <div class="bar-row" data-month="2" data-prospects="40" data-leads="10" data-customers="3">
+                                <div class="bar-prospects" style="width: 33.3%;"><div class="bar-leads" style="width: 25%;"><div class="bar-customers" style="width: 30%;"></div></div></div>
+                            </div>
+                            <div class="bar-row" style="position: relative;" data-month="3" data-prospects="63" data-leads="13" data-customers="5">
+                                <div class="bar-prospects" style="width: 52.5%;"><div class="bar-leads" style="width: 20.6%;"><div class="bar-customers" style="width: 38.4%;"></div></div></div>
+                                <!-- Tooltip Mockup -->
+                                <div class="chart-tooltip">
+                                    Month #3<br>
+                                    Prospects: 63<br>
+                                    Leads: 13<br>
+                                    Customers: 5
+                                </div>
+                            </div>
+                            <div class="bar-row" data-month="4" data-prospects="85" data-leads="18" data-customers="7">
+                                <div class="bar-prospects" style="width: 70.8%;"><div class="bar-leads" style="width: 21.1%;"><div class="bar-customers" style="width: 38.8%;"></div></div></div>
+                            </div>
+                            <div class="bar-row" data-month="5" data-prospects="105" data-leads="22" data-customers="8">
+                                <div class="bar-prospects" style="width: 87.5%;"><div class="bar-leads" style="width: 20.9%;"><div class="bar-customers" style="width: 36.3%;"></div></div></div>
+                            </div>
+                            <div class="bar-row" data-month="6" data-prospects="125" data-leads="25" data-customers="10">
+                                <div class="bar-prospects" style="width: 100%;"><div class="bar-leads" style="width: 20%;"><div class="bar-customers" style="width: 40%;"></div></div></div>
+                            </div>
+                        </div>
+
+                        <div class="x-axis-labels">
+                            <span>0 people</span>
+                            <span>20 people</span>
+                            <span>40 people</span>
+                            <span>60 people</span>
+                            <span>80 people</span>
+                            <span>100 people</span>
+                            <span>120 people</span>
+                        </div>
+                        <div class="y-axis-title">Months</div>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-panel">
+                    <div class="stat-card" style="background-color: #646c7a; color: #fff;">
+                        <div class="stat-header">
+                            <div class="stat-title"><i class="fa-solid fa-folder"></i> Prospects</div>
+                            <div class="stat-percent">100%</div>
+                        </div>
+                        <div class="stat-value">125</div>
+                        <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 100%; background: #fff;"></div></div>
+                    </div>
+
+                    <div class="stat-card" style="background-color: #8993a4; color: #1e2433;">
+                        <div class="stat-header">
+                            <div class="stat-title"><i class="fa-solid fa-user"></i> Leads</div>
+                            <div class="stat-percent">20%</div>
+                        </div>
+                        <div class="stat-value" style="color: #fff;">25</div>
+                        <div class="progress-bar-bg" style="background-color: rgba(30,36,51,0.2);"><div class="progress-bar-fill" style="width: 20%; background: #fff;"></div></div>
+                    </div>
+
+                    <div class="stat-card" style="background-color: #c7cedd; color: #1e2433;">
+                        <div class="stat-header">
+                            <div class="stat-title"><i class="fa-solid fa-trophy"></i> Customers</div>
+                            <div class="stat-percent">8%</div>
+                        </div>
+                        <div class="stat-value" style="color: #fff;">10</div>
+                        <div class="progress-bar-bg" style="background-color: rgba(30,36,51,0.2);"><div class="progress-bar-fill" style="width: 8%; background: #fff;"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Sliders -->
+            <div class="panel sliders-panel">
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <label>Lead Response Rate</label>
+                    </div>
+                    <div class="range-slider">
+                        <input type="range" min="0" max="100" value="40" class="slider" id="leadRate">
+                        <div class="slider-value" id="valLeadRate">40.00%</div>
+                    </div>
+                </div>
+
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <label>Prospect Response Rate</label>
+                    </div>
+                    <div class="range-slider">
+                        <input type="range" min="0" max="100" value="20" class="slider" id="prospectRate">
+                        <div class="slider-value" id="valProspectRate">20.00%</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
